@@ -2,7 +2,10 @@
 (add-to-list 'package-archives
   '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
-;; (package-install 'magit)
+;; Does not work?
+;;   (package-install 'magit)
+;; This dones:
+;;   M-x package-install RET magit RET
 
 ;; Color Theme
 ;; (load-theme 'zenburn t)  ;; Doesn't work with Magit.
