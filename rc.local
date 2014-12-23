@@ -9,8 +9,10 @@
 # Printing.
 /usr/sbin/cupsd
 
-# Bus Pirate
+# USB Devices
 # See https://github.com/dnschneid/crouton/wiki/udev:-manage-inserted-devices
+mkdir -p /run/udev/rules.d
 cp /etc/udev/rules.d/*.rules /run/udev/rules.d
+udevadm control --reload
 
 exit 0
