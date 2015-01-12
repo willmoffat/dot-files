@@ -55,6 +55,19 @@
 (require 'ido)
 (ido-mode t)
 
+;; HTML
+
+;; Download latest var.jar from http://validator.github.io/validator/
+;; Unfortunately the gnu output isn't fully compile buffer comptabile, It outputs local 
+;; URLs like "file:/foo/bar.html" rather than filenames. This breaks error navigation.
+(defun html5-validate()
+  (interactive)
+  (save-buffer)
+  (compile (concat "java -jar ~/bin/vnu.jar " (shell-quote-argument (buffer-file-name)))))
+
+(add-hook 'html-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c v") 'html5-validate)))
 
 ;; BUGS
 
