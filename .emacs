@@ -1,6 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 ;; Does not work?
 ;;   (package-install 'magit)
@@ -8,7 +8,7 @@
 ;;   M-x package-install RET magit RET
 
 ;; Color Theme
-;; (load-theme 'zenburn t)  ;; Doesn't work with Magit.
+(load-theme 'zenburn t)
 
 ;; Minimal UI
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -49,6 +49,7 @@
 (global-set-key (kbd "C-x c") 'compile)
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "M-g") 'goto-line)
 
 ;; Auto-complete
 (require 'ido)
@@ -58,3 +59,4 @@
 ;; BUGS
 
 ;; emacsclient has 2s delay. See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.
+
