@@ -4,7 +4,7 @@
 
 ;; Does not work?
 ;;   (package-install 'magit)
-;; This dones:
+;; This does:
 ;;   M-x package-install RET magit RET
 
 ;; Color Theme
@@ -50,6 +50,11 @@
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "C-x f") 'flyspell-mode)
+;; Default keys to remember:
+;;
+;; M-$ 'ispell-wold
+;; C-c left/right - navigate HTML tags.
 
 ;; Auto-complete
 (require 'ido)
