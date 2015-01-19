@@ -74,7 +74,29 @@
           (lambda ()
             (local-set-key (kbd "C-c v") 'html5-validate)))
 
+;; JavaScript
+
+(add-to-list 'load-path "~/.emacs.d/jshint-mode")
+(require 'flymake-jshint)
+(add-hook 'javascript-mode-hook
+     (lambda () (flymake-mode t)))
+
+;; Remote editing - Add this to .bash_profile on remote machines
+
+;; function set-eterm-dir {
+;;   echo -e "\033AnSiTu" "$LOGNAME"
+;;   echo -e "\033AnSiTc" "$(pwd)"
+;;   echo -e "\033AnSiTh" "SSH_PROFILE_NAME_OR_HOSTNAME"
+;;   history -a # Write history to disk.
+;; }
+;; # Track directory, username, and cwd for remote logons.
+;; if [ "$TERM" = "eterm-color" ]; then
+;;   PROMPT_COMMAND=set-eterm-dir
+;; fi
+
+
 ;; BUGS
 
 ;; emacsclient has 2s delay. See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.
 
+(put 'upcase-region 'disabled nil)
