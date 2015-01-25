@@ -34,7 +34,24 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Save history.
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
+
+;; Highlight words.
+(defun font-lock-comment-annotations ()
+  (font-lock-add-keywords
+   nil '(
+	 ("\\<\\(TODO\\|Note\\)" 1 font-lock-warning-face t)
+	 ("\\<\\(HACK\\)" 1 '(:foreground "red") t)
+	 )
+   ))
+(add-hook 'prog-mode-hook 'font-lock-comment-annotations)
+
+
+;; Hightlight matching () []
+(show-paren-mode)
 
 ;; C
 (require 'clang-format)
