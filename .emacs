@@ -81,6 +81,7 @@
 (global-unset-key (kbd "C-x C-c"))
 (global-set-key (kbd "C-x C-c C-v") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-x c") 'compile)
+(global-set-key (kbd "C-c C-k") 'kill-compilation)
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-g") 'goto-line)
@@ -145,6 +146,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(compilation-scroll-output t)
  '(custom-safe-themes (quote ("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
