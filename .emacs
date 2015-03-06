@@ -78,7 +78,8 @@
 ;; (global-set-key "\C-w" 'backward-kill-word) TODO: C-backspace?
 ;; TODO(wdm) Add kill-region
 (global-set-key (kbd "C-z") 'undo)
-(global-unset-key (kbd "C-x C-c"))
+(global-unset-key (kbd "C-t"))  ;; Disable transpose.
+(global-unset-key (kbd "C-x C-c"))  ;; Default exit is too easy to press.
 (global-set-key (kbd "C-x C-c C-v") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-x c") 'compile)
 (global-set-key (kbd "C-c C-k") 'kill-compilation)
