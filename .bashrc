@@ -118,7 +118,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$HOME/bin:$PATH
+export GOPATH=$HOME/go
+export PATH=$HOME/bin:$GOPATH:$PATH
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval `ssh-agent -s`
