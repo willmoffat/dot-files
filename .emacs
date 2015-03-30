@@ -91,8 +91,9 @@
 
 ;; Default keys to remember:
 ;;
-;; M-$ 'ispell-wold
-;; C-c left/right - navigate HTML tags.
+;; M-$ - 'ispell-word
+;; C-c left/right = navigate HTML tags.
+;; M-w - 'kill-ring-save = Copy!
 
 ;; Auto-complete
 (require 'ido)
