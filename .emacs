@@ -138,6 +138,11 @@
 ;; fi
 
 
+;; Android
+;; (setq android-mode-sdk-dir "/opt/android") ;; TODO(wdm): Use $ANDROID_HOME
+;; (require 'android-mode)
+;; (require 'android)
+
 ;; BUGS
 
 ;; emacsclient has 2s delay. See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.

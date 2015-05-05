@@ -15,4 +15,12 @@ mkdir -p /run/udev/rules.d
 cp /etc/udev/rules.d/*.rules /run/udev/rules.d
 udevadm control --reload
 
+# Open ports.
+/sbin/iptables -I INPUT -p tcp --dport 22   -j ACCEPT  # SSH
+/sbin/iptables -I INPUT -p tcp --dport 8090 -j ACCEPT  # Muuseserver.
+
+# SSHD
+mkdir -p -m0755 /var/run/sshd
+/usr/sbin/sshd
+
 exit 0
