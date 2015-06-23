@@ -1,12 +1,14 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+ (add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(setq package-enable-at-startup nil) (package-initialize)
 
 ;; Does not work?
 ;;   (package-install 'magit)
 ;; This does:
 ;;   M-x package-install RET magit RET
 ;; If things are foobar, try M-x package-refresh-contents
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Color Theme
 (load-theme 'zenburn t)
@@ -26,7 +28,8 @@
 (line-number-mode 1)     ;; Show row number.
 (column-number-mode 1)   ;; Show column number.
 
-(add-to-list 'load-path "~/.emacs.d")
+;; TODO(wdm) Fix this.
+;; (add-to-list 'load-path "~/.emacs.d")
 
 ;; Backups in /tmp
 (setq backup-directory-alist
@@ -53,11 +56,10 @@
 ;; Hightlight matching () []
 (show-paren-mode)
 
-;; C
-(require 'clang-format)
-;;(add-hook 'c-mode-hook
-;;	  (lambda()
-;;	    (add-hook 'before-save-hook 'clang-format-buffer)))
+;; Clang-format
+;; sudo apt-get install clang-format-3.6
+;; cd /usr/bin; sudo ln -s clang-format-3.6 clang-format
+;; M-x package-install clang-format
 
 ;; Lua
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
@@ -102,7 +104,7 @@
 ;; HTML
 
 ;; Download latest var.jar from http://validator.github.io/validator/
-;; Unfortunately the gnu output isn't fully compile buffer comptabile, It outputs local 
+;; Unfortunately the gnu output isn't fully compile buffer comptabile, It outputs local
 ;; URLs like "file:/foo/bar.html" rather than filenames. This breaks error navigation.
 (defun html5-validate()
   (interactive)
@@ -116,10 +118,11 @@
 ;; JavaScript
 
 (setq js-indent-level 2)  ;; Google style.
-(add-to-list 'load-path "~/.emacs.d/jshint-mode")
-(require 'flymake-jshint)
-(add-hook 'javascript-mode-hook
-     (lambda () (flymake-mode t)))
+
+;; (add-to-list 'load-path "~/.emacs.d/jshint-mode")
+;; (require 'flymake-jshint)
+;; (add-hook 'javascript-mode-hook
+;;     (lambda () (flymake-mode t)))
 
 ;; Remote editing
 (setq tramp-default-method "ssh")
@@ -149,7 +152,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(compilation-scroll-output t)
- '(custom-safe-themes (quote ("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default))))
+ '(custom-safe-themes
+   (quote
+    ("ff9e6deb9cfc908381c1267f407b8830bcad6028231a5f736246b9fc65e92b44" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
