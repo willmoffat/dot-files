@@ -23,6 +23,7 @@
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
 (menu-bar-mode -1)
+(tool-bar-mode -1)
 
 (transient-mark-mode t)  ;; Show the current region.
 (line-number-mode 1)     ;; Show row number.

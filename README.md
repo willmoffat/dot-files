@@ -23,3 +23,4 @@ Note that an SSH clone required for ssh ForwardAgent to work.
   # Note(wdm) Capslock as Control
   setxkbmap -option ctrl:nocaps
 * `ln -s ~/.dotfiles/i3-wm-config ~/.i3/config`
+TODO: ./ssh/config
