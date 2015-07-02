@@ -121,7 +121,11 @@ fi
 export GOPATH=$HOME/go
 export PATH=$HOME/bin:$GOPATH/bin:$PATH
 
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add
-fi
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+#  eval `ssh-agent -s`
+#  ssh-add
+#fi
+
+# Required for i3-wm.
+# sudo apt-get install keychain
+eval $(keychain --eval id_rsa)
