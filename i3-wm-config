@@ -130,3 +130,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+
+# https://faq.i3wm.org/question/3747/enabling-multimedia-keys/
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
