@@ -19,4 +19,8 @@ Note that an SSH clone required for ssh ForwardAgent to work.
 * Consider adding these files:
   ~/.config/git/ignore
 * Script to compile, download my ~/bin.
-
+* ~/.xinputrc
+  # Note(wdm) Capslock as Control
+  setxkbmap -option ctrl:nocaps
+* `ln -s ~/.dotfiles/i3-wm-config ~/.i3/config`
+TODO: ./ssh/config

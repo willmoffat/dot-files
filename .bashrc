@@ -121,11 +121,16 @@ fi
 export GOPATH=$HOME/go
 export PATH=$HOME/bin:$GOPATH/bin:$PATH
 
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add
-fi
-
 # Node/IoJs version manager.
 export NVM_DIR="/home/wdm/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+#  eval `ssh-agent -s`
+#  ssh-add
+#fi
+
+# Required for i3-wm.
+# sudo apt-get install keychain
+eval $(keychain --eval id_rsa)
+
