@@ -22,9 +22,9 @@ function check {
 
   DIR="$DUMP_DIR/$LABEL"
 
-  DUMP0=index.0.html # Current dump - may fail.
-  DUMP1=index.1.html # Previous successful dump
-  DUMP2=index.2.html # Prevoius, previous. #TODO(wdm) Needed?
+  DUMP0=index.0.txt # Current dump - may fail.
+  DUMP1=index.1.txt # Previous successful dump
+  DUMP2=index.2.txt # Prevoius, previous. #TODO(wdm) Needed?
 
   DUMP_LOG=dump.err
   DIFF_LOG=diff.txt
@@ -33,10 +33,11 @@ function check {
   cd $DIR
   date
 
-  wget --output-document=$DUMP0 "$URL" 2>$DUMP_LOG
+  # wget --output-document=$DUMP0 "$URL" 2>$DUMP_LOG
+  lynx -dump -nolist -stderr "$URL" 1>$DUMP0 2>$DUMP_LOG
   if [ $? -ne 0 ]
   then
-      email_log "wget fail $LABEL" $DUMP_LOG
+      email_log "dump fail $LABEL" $DUMP_LOG
       return
   fi
 
