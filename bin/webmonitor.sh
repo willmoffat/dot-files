@@ -17,30 +17,38 @@ function email_log {
 function check {
   LABEL=$1
   URL=$2
-  DIR="$DUMP_DIR/$LABEL"
 
   echo "Check $LABEL $URL"
+
+  DIR="$DUMP_DIR/$LABEL"
+
+  DUMP0=index.0.html # Current dump - may fail.
+  DUMP1=index.1.html # Previous successful dump
+  DUMP2=index.2.html # Prevoius, previous. #TODO(wdm) Needed?
+
+  DUMP_LOG=dump.err
+  DIFF_LOG=diff.txt
 
   mkdir -p $DIR
   cd $DIR
   date
 
-  wget --output-document=index.0.html "$URL" 2> wget.err
+  wget --output-document=$DUMP0 "$URL" 2>$DUMP_LOG
   if [ $? -ne 0 ]
   then
-      email_log "wget fail $LABEL" wget.err
+      email_log "wget fail $LABEL" $DUMP_LOG
       return
   fi
 
-  rm index.2.html
-  mv index.1.html index.2.html
-  mv index.0.html index.1.html
+  rm $DUMP2
+  mv $DUMP1 $DUMP2
+  mv $DUMP0 $DUMP1
 
-  diff index.1.html index.2.html > diff.txt
+  diff $DUMP1 $DUMP2 > $DIFF_LOG
   if [ $? -ne 0 ]
   then
       echo DIFF
-      email_log $LABEL diff.txt
+      email_log $LABEL $DIFF_LOG
       return
   fi
   echo NO DIFF
