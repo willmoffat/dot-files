@@ -6,7 +6,7 @@ cd $(dirname $0)
 # Set EMAIL and check_all function.
 source webmonitor.private.sh
 
-DUMP_DIR="$HOME/.webmonitor"
+DUMP_DIR="/var/log/webmonitor"
 
 function email_log {
   LABEL=$1
