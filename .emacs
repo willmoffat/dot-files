@@ -1,6 +1,6 @@
 ;;; willdotemacs --- Will's .emacs file.
 ;;; Commentary:
-;; TODO...
+;; TODO(wdm) Review https://github.com/manugoyal/.emacs.d
 
 ;;; Code:
 
@@ -11,25 +11,66 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; Bootstrap `use-package'
+;; Bootstrap 'use-package' https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile
   (require 'use-package))
 
+;;;;;;;;;;;;;;
+;; Packages ;;
+;;;;;;;;;;;;;;
+
+;; In-place error highlighting.
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 
+;; Amazing git diff!
+(use-package magit
+  :ensure t
+  :defer t
+  :init
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  (global-set-key (kbd "C-x g") 'magit-status))
 
-;; This does:
-;;   M-x package-install RET magit RET
-;; If things are foobar, try M-x package-refresh-contents
-(defvar magit-last-seen-setup-instructions "1.4.0")
+;; Dark color theme.
+(use-package zenburn-theme
+  :ensure t
+  :config (load-theme 'zenburn t))
 
-;; Color Theme
-(load-theme 'zenburn t)
+;; go-fmt for other languages.
+;; sudo apt-get install clang-format-3.6
+;; cd /usr/bin; sudo ln -s clang-format-3.6 clang-format
+(use-package clang-format
+  :ensure t
+  :defer t)
+
+;; Remote editing
+;;  - Add this to .bash_profile on remote machines
+;; function set-eterm-dir {
+;;   echo -e "\033AnSiTu" "$LOGNAME"
+;;   echo -e "\033AnSiTc" "$(pwd)"
+;;   echo -e "\033AnSiTh" "SSH_PROFILE_NAME_OR_HOSTNAME"
+;;   history -a # Write history to disk.
+;; }
+;; # Track directory, username, and cwd for remote logons.
+;; if [ "$TERM" = "eterm-color" ]; then
+;;   PROMPT_COMMAND=set-eterm-dir
+;; fi
+(use-package tramp
+  :ensure t
+  :defer t
+  :init (setq tramp-default-method "ssh"))
+
+;; Auto-complete
+(use-package ido
+  :ensure t
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1))
+
 
 ;; Hightlight active window (panel) better.
 ;; M-x package-install smart-line-mode
@@ -46,9 +87,6 @@
 (transient-mark-mode t)  ;; Show the current region.
 (line-number-mode 1)     ;; Show row number.
 (column-number-mode 1)   ;; Show column number.
-
-;; TODO(wdm) Fix this.
-;; (add-to-list 'load-path "~/.emacs.d")
 
 ;; Backups in /tmp
 (setq backup-directory-alist
@@ -75,11 +113,6 @@
 ;; Hightlight matching () []
 (show-paren-mode)
 
-;; Clang-format
-;; sudo apt-get install clang-format-3.6
-;; cd /usr/bin; sudo ln -s clang-format-3.6 clang-format
-;; M-x package-install clang-format
-
 ;; Lua
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
@@ -105,7 +138,7 @@
 (global-set-key (kbd "C-x c") 'compile)
 (global-set-key (kbd "C-c C-k") 'kill-compilation)
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
-(global-set-key (kbd "C-x g") 'magit-status)
+
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-x f") 'clang-format-buffer)
 ;; (global-set-key (kbd "C-x f") 'flyspell-mode)
@@ -116,9 +149,6 @@
 ;; C-c left/right = navigate HTML tags.
 ;; M-w - 'kill-ring-save = Copy!
 
-;; Auto-complete
-(require 'ido)
-(ido-mode t)
 
 ;; HTML
 
@@ -138,25 +168,6 @@
 
 (defvar js-indent-level 2)  ;; Google style.
 
-;; flymake-jslint is an installed package.
-(add-hook 'js-mode-hook 'flymake-jslint-load)
-(require 'flymake)
-
-;; Remote editing
-(defvar tramp-default-method "ssh")
-(require 'tramp)
-
-;;  - Add this to .bash_profile on remote machines
-;; function set-eterm-dir {
-;;   echo -e "\033AnSiTu" "$LOGNAME"
-;;   echo -e "\033AnSiTc" "$(pwd)"
-;;   echo -e "\033AnSiTh" "SSH_PROFILE_NAME_OR_HOSTNAME"
-;;   history -a # Write history to disk.
-;; }
-;; # Track directory, username, and cwd for remote logons.
-;; if [ "$TERM" = "eterm-color" ]; then
-;;   PROMPT_COMMAND=set-eterm-dir
-;; fi
 
 
 ;; Android
