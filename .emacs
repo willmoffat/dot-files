@@ -1,13 +1,13 @@
-;;; willdotemacs --- Will's .emacs file.
+;;; .emacs --- Will's .emacs file.
 ;;; Commentary:
 ;; TODO(wdm) Review https://github.com/manugoyal/.emacs.d
 
 ;;; Code:
 
 (require 'package)
-(setq package-enable-at-startup nil)  ;; TODO(wdm) ??
+(setq package-enable-at-startup nil)  ;; But don't load all the packages.
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")  ;; TODO(wdm) Why?
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
@@ -21,6 +21,10 @@
 ;;;;;;;;;;;;;;
 ;; Packages ;;
 ;;;;;;;;;;;;;;
+
+;; For defining keyboard bindings
+(use-package bind-key
+  :ensure t)
 
 ;; In-place error highlighting.
 (use-package flycheck
@@ -71,18 +75,78 @@
   (ido-mode 1)
   (ido-everywhere 1))
 
+;; camelCase Navigation
+;; We want to navigate camelCase words as separate words.
+(use-package subword
+  :diminish subword-mode
+  :init
+  (global-subword-mode))
 
-;; Hightlight active window (panel) better.
-;; M-x package-install smart-line-mode
-;; (sml/setup)  TODO(wdm) Why doesn't this work on startup?
+;; Spell Checking
+;; Remember: M-$ - 'ispell-word
+(use-package flyspell
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'text-mode-hook 'flyspell-mode))
 
+;; Kill whitespace!
+(use-package whitespace
+  :ensure t
+  :diminish whitespace-mode
+  :init (add-hook 'prog-mode-hook 'whitespace-mode))
+
+;; HTML/XML/JavaScript
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js"
+ ;; :config (setq js-indent-level 2)  ;; Google style.
+  )
+
+;; Download latest var.jar from http://validator.github.io/validator/
+;; Unfortunately the gnu output isn't fully compile buffer comptabile, It
+;; outputs local URLs like "file:/foo/bar.html" rather than filenames. This
+;; breaks error navigation.
+(defun html5-validate()
+  (interactive)
+  (save-buffer)
+  (compile (concat "java -jar ~/bin/vnu.jar "
+                   (shell-quote-argument (buffer-file-name)))))
+
+(use-package web-mode
+  :ensure t
+  :mode "\\.html"
+  :bind ("C-c v" . html5-validate)
+  :config (setq web-mode-enable-auto-quoting nil))
+
+;;;;;;;;;;;;;;;;;;;
+;; General setup ;;
+;;;;;;;;;;;;;;;;;;;
+
+;; UTF-8 Encoding
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(setq current-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(setenv "LC_CTYPE" "UTF-8")
 
 ;; Minimal UI
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
+(scroll-bar-mode -1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+
+;; Don't use tabs.
+(setq-default indent-tabs-mode nil)
+
+;; M-a - Move to sentence start.
+;; M-e - Move to sentence end.
+(setq sentence-end-double-space nil)
 
 (transient-mark-mode t)  ;; Show the current region.
 (line-number-mode 1)     ;; Show row number.
@@ -96,16 +160,17 @@
 
 ;; Save history.
 (savehist-mode 1)
-(defvar savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+(defvar savehist-additional-variables
+  '(kill-ring search-ring regexp-search-ring))
 
 
-;; Highlight words.
 (defun font-lock-comment-annotations ()
+  "Words to highlight."
   (font-lock-add-keywords
    nil '(
-	 ("\\<\\(TODO\\|Note\\)" 1 font-lock-warning-face t)
-	 ("\\<\\(HACK\\)" 1 '(:foreground "red") t)
-	 )
+         ("\\<\\(TODO\\|Note\\)" 1 font-lock-warning-face t)
+         ("\\<\\(HACK\\)" 1 '(:foreground "red") t)
+         )
    ))
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
@@ -141,34 +206,11 @@
 
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-x f") 'clang-format-buffer)
-;; (global-set-key (kbd "C-x f") 'flyspell-mode)
 
 ;; Default keys to remember:
 ;;
-;; M-$ - 'ispell-word
 ;; C-c left/right = navigate HTML tags.
 ;; M-w - 'kill-ring-save = Copy!
-
-
-;; HTML
-
-;; Download latest var.jar from http://validator.github.io/validator/
-;; Unfortunately the gnu output isn't fully compile buffer comptabile, It outputs local
-;; URLs like "file:/foo/bar.html" rather than filenames. This breaks error navigation.
-(defun html5-validate()
-  (interactive)
-  (save-buffer)
-  (compile (concat "java -jar ~/bin/vnu.jar " (shell-quote-argument (buffer-file-name)))))
-
-(add-hook 'html-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c v") 'html5-validate)))
-
-;; JavaScript
-
-(defvar js-indent-level 2)  ;; Google style.
-
-
 
 ;; Android
 ;; (setq android-mode-sdk-dir "/opt/android") ;; TODO(wdm): Use $ANDROID_HOME
@@ -177,24 +219,19 @@
 
 ;; BUGS
 
-;; emacsclient has 2s delay. See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.
+;; emacsclient has 2s delay.
+;; See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.
 
 (put 'upcase-region 'disabled nil)
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(compilation-scroll-output t)
  '(custom-safe-themes
    (quote
-    ("ff9e6deb9cfc908381c1267f407b8830bcad6028231a5f736246b9fc65e92b44" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default))))
+    ("ff9e6deb9cfc908381c1267f407b8830bcad6028231a5f736246b9fc65e92b44"
+     "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f"
+     default))))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(whitespace-space ((t (:background "gray25")))))
 
 (provide '.emacs)
 ;;; .emacs ends here
