@@ -1,14 +1,32 @@
-(require 'package)
- (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-(setq package-enable-at-startup nil) (package-initialize)
+;;; willdotemacs --- Will's .emacs file.
+;;; Commentary:
+;; TODO...
 
-;; Does not work?
-;;   (package-install 'magit)
+;;; Code:
+
+(require 'package)
+(setq package-enable-at-startup nil)  ;; TODO(wdm) ??
+(add-to-list 'package-archives
+	     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")  ;; TODO(wdm) Why?
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+
 ;; This does:
 ;;   M-x package-install RET magit RET
 ;; If things are foobar, try M-x package-refresh-contents
-(setq magit-last-seen-setup-instructions "1.4.0")
+(defvar magit-last-seen-setup-instructions "1.4.0")
 
 ;; Color Theme
 (load-theme 'zenburn t)
@@ -40,7 +58,7 @@
 
 ;; Save history.
 (savehist-mode 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+(defvar savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 
 ;; Highlight words.
@@ -118,15 +136,14 @@
 
 ;; JavaScript
 
-(setq js-indent-level 2)  ;; Google style.
+(defvar js-indent-level 2)  ;; Google style.
 
-;; (add-to-list 'load-path "~/.emacs.d/jshint-mode")
-;; (require 'flymake-jshint)
-;; (add-hook 'javascript-mode-hook
-;;     (lambda () (flymake-mode t)))
+;; flymake-jslint is an installed package.
+(add-hook 'js-mode-hook 'flymake-jslint-load)
+(require 'flymake)
 
 ;; Remote editing
-(setq tramp-default-method "ssh")
+(defvar tramp-default-method "ssh")
 (require 'tramp)
 
 ;;  - Add this to .bash_profile on remote machines
@@ -167,3 +184,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide '.emacs)
+;;; .emacs ends here
