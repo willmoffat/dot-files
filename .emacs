@@ -49,7 +49,8 @@
 ;; cd /usr/bin; sudo ln -s clang-format-3.6 clang-format
 (use-package clang-format
   :ensure t
-  :defer t)
+  :defer t
+  :config (setq clang-format-style "Chromium"))
 
 ;; Remote editing
 ;;  - Add this to .bash_profile on remote machines
@@ -95,7 +96,9 @@
 (use-package whitespace
   :ensure t
   :diminish whitespace-mode
-  :init (add-hook 'prog-mode-hook 'whitespace-mode))
+  :init (add-hook 'prog-mode-hook 'whitespace-mode)
+  ;; TODO(wdm) Cleaner fix to whitespace UI problems.
+  :config (set-face-attribute 'whitespace-space nil :background "gray25"))
 
 ;; HTML/XML/JavaScript
 
@@ -194,6 +197,8 @@
 ;; Keys ;;
 ;;;;;;;;;;
 
+;; TODO(wdm) Use bind.
+
 ;; (global-set-key "\C-w" 'backward-kill-word) TODO: C-backspace?
 ;; TODO(wdm) Add kill-region
 (global-set-key (kbd "C-z") 'undo)
@@ -222,16 +227,11 @@
 ;; emacsclient has 2s delay.
 ;; See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=17607.
 
+;; Enabled commands.
 (put 'upcase-region 'disabled nil)
-(custom-set-variables
- '(compilation-scroll-output t)
- '(custom-safe-themes
-   (quote
-    ("ff9e6deb9cfc908381c1267f407b8830bcad6028231a5f736246b9fc65e92b44"
-     "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f"
-     default))))
-(custom-set-faces
- '(whitespace-space ((t (:background "gray25")))))
+
+;; Compiling.
+(setq compilation-scroll-output t)
 
 (provide '.emacs)
 ;;; .emacs ends here
