@@ -142,3 +142,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
 bindsym XF86AudioMute        exec pactl set-sink-mute 1 toggle
+
+# Prevent screen-tearing in Chrome
+# sudo apt-get install compton
+exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+
+# Lock screen and suspend
+bindsym $mod+Control+l exec "systemctl suspend && i3lock"
