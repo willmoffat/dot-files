@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# sudo ln -s /etc/init.d/webmonitor ./webmonitor
+# TODO(wdm) Consider using crontab instead.
+
 set -u
 
 cd "$(dirname "$0")"
