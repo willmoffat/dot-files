@@ -2,7 +2,7 @@
 
 set -u
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 # Set EMAIL and check_all function.
 source webmonitor.private.sh
 
@@ -11,7 +11,7 @@ DUMP_DIR="/var/log/webmonitor"
 function email_log {
   LABEL=$1
   LOG=$2
-  cat $2 | mail -s "[webmonitor] $LABEL" $EMAIL
+  mail -s "[webmonitor] $LABEL" "$EMAIL" < "$LOG"
 }
 
 function check {
@@ -29,8 +29,8 @@ function check {
   DUMP_LOG=dump.err
   DIFF_LOG=diff.txt
 
-  mkdir -p $DIR
-  cd $DIR
+  mkdir -p "$DIR"
+  cd "$DIR"
   date
 
   # wget --output-document=$DUMP0 "$URL" 2>$DUMP_LOG
@@ -49,7 +49,7 @@ function check {
   if [ $? -ne 0 ]
   then
       echo DIFF
-      email_log $LABEL $DIFF_LOG
+      email_log "$LABEL" "$DIFF_LOG"
       return
   fi
   echo NO DIFF
@@ -57,7 +57,7 @@ function check {
 
 echo "Webmonitor running..."
 
-while [ 1 ]
+while :
 do
   check_all  # private function that calls 'check LABEL URL'
   sleep 43200 # half day
