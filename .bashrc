@@ -125,12 +125,8 @@ export PATH=$HOME/bin:$GOPATH/bin:$PATH
 export NVM_DIR="/home/wdm/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-#if [ -z "$SSH_AUTH_SOCK" ] ; then
-#  eval `ssh-agent -s`
-#  ssh-add
-#fi
-
-# Required for i3-wm.
-# sudo apt-get install keychain
-eval $(keychain --eval id_rsa)
-
+# Setup SSH keys on my dev laptops.
+if [ -x "$(command -v keychain)" ]; then
+    # sudo apt-get install keychain # To install on laptop.
+    eval $(keychain --eval id_rsa)
+fi
