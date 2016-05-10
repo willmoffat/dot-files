@@ -95,10 +95,20 @@
 ;; Kill whitespace!
 (use-package whitespace
   :ensure t
+  :defer t
   :diminish whitespace-mode
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
   :config (set-face-attribute 'whitespace-space nil :background "gray25"))
+
+;; Markdown
+(use-package markdown-mode
+  :ensure t
+  :defer t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)))
 
 ;; HTML/XML/JavaScript
 
@@ -123,6 +133,16 @@
   :mode "\\.html"
   :bind ("C-c v" . html5-validate)
   :config (setq web-mode-enable-auto-quoting nil))
+
+;; Support Chrome extension Emacs Edit.
+(use-package edit-server
+  :if window-system  ;; Only run if in a GUI.
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'after-init-hook 'server-start t)
+  (add-hook 'after-init-hook 'edit-server-start t))
+
 
 ;;;;;;;;;;;;;;;;;;;
 ;; General setup ;;
