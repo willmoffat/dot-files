@@ -151,9 +151,16 @@
   :mode "\\.html"
   :bind ("C-c v" . html5-validate)
   :config
+  ;; Highlight &amp;
   (set-face-attribute 'web-mode-html-entity-face nil :foreground "chocolate")
   (setq web-mode-enable-html-entities-fontification t)
-  (setq web-mode-enable-auto-quoting nil))
+  ;; Highlight <style> and <script> sections.
+  (set-face-attribute 'web-mode-block-face nil :background "#555")
+  (setq web-mode-enable-part-face t)
+  ;; TODO(wdm) Figure out how to use my global lights.
+  (set-face-attribute 'web-mode-comment-keyword-face nil :foreground "orange red")
+  ;; Misc
+  (setq web-mode-enable-current-element-highlight t))
 
 ;; Support Chrome extension Emacs Edit.
 (use-package edit-server
