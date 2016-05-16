@@ -1,8 +1,0 @@
-[Unit]
-Description=Webmonitor - daily text diffs of websites
-
-[Service]
-ExecStart=/home/wdm/bin/webmonitor.sh
-
-[Install]
-WantedBy=multi-user.target

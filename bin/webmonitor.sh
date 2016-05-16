@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# sudo ln -s /etc/init.d/webmonitor ./webmonitor
-# TODO(wdm) Consider using crontab instead.
+# To install in user crontab:
+# crontab -e
+# Confirm with:
+# crontab -l
+#   m h  dom mon dow   command
+#   30 6,12,20 * * *     /home/wdm/bin/webmonitor.sh
 
 set -u
 
@@ -60,10 +64,4 @@ function check {
 
 echo "Webmonitor running..."
 
-while :
-do
-  check_all  # private function that calls 'check LABEL URL'
-  sleep 43200 # half day
-done
-
-# 86400 seconds per day
+check_all  # private function that calls 'check LABEL URL'
