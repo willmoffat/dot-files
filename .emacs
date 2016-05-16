@@ -101,6 +101,15 @@
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
   :config (set-face-attribute 'whitespace-space nil :background "gray25"))
 
+
+;; Trim extra white-space in lines edited.
+(use-package ws-butler
+  :ensure t
+  :diminish ws-butler-mode
+  :config
+  (add-hook 'prog-mode-hook 'ws-butler-mode)
+  (add-hook 'yaml-mode-hook 'ws-butler-mode))
+
 ;; Yaml
 (use-package yaml-mode
   :ensure t
