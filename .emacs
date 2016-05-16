@@ -150,7 +150,10 @@
   :ensure t
   :mode "\\.html"
   :bind ("C-c v" . html5-validate)
-  :config (setq web-mode-enable-auto-quoting nil))
+  :config
+  (set-face-attribute 'web-mode-html-entity-face nil :foreground "chocolate")
+  (setq web-mode-enable-html-entities-fontification t)
+  (setq web-mode-enable-auto-quoting nil))
 
 ;; Support Chrome extension Emacs Edit.
 (use-package edit-server
