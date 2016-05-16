@@ -101,6 +101,15 @@
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
   :config (set-face-attribute 'whitespace-space nil :background "gray25"))
 
+;; Yaml
+(use-package yaml-mode
+  :ensure t
+  :defer t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+            '(lambda ()
+               (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 ;; Markdown
 (use-package markdown-mode
   :ensure t
@@ -249,6 +258,7 @@
 
 ;; Enabled commands.
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;; Compiling.
 (setq compilation-scroll-output t)
