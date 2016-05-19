@@ -125,12 +125,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-}
 
+# bindsym $mod+$alt+8 exec i3-msg workspace 8;  exec google-chrome --profile-directory="Profile 0"
+# bindsym $mod+$alt+9 exec i3-msg workspace 9;  exec google-chrome --profile-directory="Profile 1"
+# bindsym $mod+$alt+0 exec i3-msg workspace 10; exec google-chrome --profile-directory="Profile 2"
+
+# Top status bar showing network throughput, load, date etc.
+bar {
+    status_command ~/.dotfiles/bin/i3status-with-network.bash
+    position top
+    font pango:12
+    colors {
+        background #002B36
+        statusline #dddddd
+    }
+}
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys/
 
@@ -153,3 +162,6 @@ bindsym $mod+Control+l exec "systemctl suspend && i3lock"
 # PreScr - Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id  ~/.dotfiles/bin/screenshot.sh
 
+bindsym $mod+n \
+        fullscreen disable \
+        exec --no-startup-id "google-chrome --incognito"
