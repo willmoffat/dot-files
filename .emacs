@@ -83,6 +83,17 @@
   :init
   (global-subword-mode))
 
+;; Ediff - don't popup a navigation frame.
+ (use-package ediff
+   :config
+   (setq diff-switches               "-u"
+         ediff-custom-diff-options   "-U3"
+         ediff-split-window-function 'split-window-horizontally
+         ediff-window-setup-function 'ediff-setup-windows-plain)
+   (add-hook 'ediff-startup-hook 'ediff-toggle-wide-display)
+   (add-hook 'ediff-cleanup-hook 'ediff-toggle-wide-display)
+   (add-hook 'ediff-suspend-hook 'ediff-toggle-wide-display))
+
 ;; Spell Checking
 ;; Remember: M-$ - 'ispell-word
 (use-package flyspell
