@@ -1,9 +1,15 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
+)
+
+var (
+	port = flag.String("port", "8000", "port number to attach to")
+	dir  = flag.String("dir", ".", "directory to serve")
 )
 
 func loggingHandler(h http.Handler) http.Handler {
@@ -15,9 +21,10 @@ func loggingHandler(h http.Handler) http.Handler {
 }
 
 func main() {
-	fmt.Println("Serving files on http://localhost:8080")
-	http.Handle("/", loggingHandler(http.FileServer(http.Dir("."))))
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	flag.Parse()
+	fmt.Printf("serving %s on http://localhost:%s\n", *dir, *port)
+	http.Handle("/", loggingHandler(http.FileServer(http.Dir(*dir))))
+	if err := http.ListenAndServe(":"+*port, nil); err != nil {
 		log.Fatal("ListenAndServer: ", err)
 	}
 }
