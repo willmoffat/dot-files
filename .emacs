@@ -32,12 +32,15 @@
   :init (global-flycheck-mode))
 
 ;; Amazing git diff!
+;; Show output from commit hook.
 (use-package magit
   :ensure t
   :defer t
-  :init
-  (setq magit-last-seen-setup-instructions "1.4.0")
-  (global-set-key (kbd "C-x g") 'magit-status))
+  :bind ("C-x g" . magit-status)
+  :init (setq magit-last-seen-setup-instructions "1.4.0")
+  :config
+  (add-hook 'git-commit-mode-hook
+            (lambda () (save-selected-window (magit-process)))))
 
 ;; Dark color theme.
 (use-package zenburn-theme
@@ -143,7 +146,7 @@
 
 (use-package js2-mode
   :ensure t
-  :mode "\\.js"
+  :mode ("\\.js" "\\.gs")
  ;; :config (setq js-indent-level 2)  ;; Google style.
   )
 
@@ -162,6 +165,7 @@
   :mode "\\.html"
   :bind ("C-c v" . html5-validate)
   :config
+  (add-hook 'web-mode-hook (lambda () (whitespace-mode -1)))
   ;; Highlight &amp;
   (set-face-attribute 'web-mode-html-entity-face nil :foreground "chocolate")
   (setq web-mode-enable-html-entities-fontification t)
