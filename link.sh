@@ -10,6 +10,4 @@ FILES=$(find .dotfiles -maxdepth 1 -not -name '*.git' -iwholename '.dotfiles/.*'
 ln -si "$FILES" "$HOME"
 popd
 
-echo "Press ENTER to overwrite Chromebook /etc/rc.local"
-read
-sudo cp -i rc.local /etc/rc.local
+echo "Remember to manually copy files in machines/"
