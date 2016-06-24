@@ -1,17 +1,33 @@
 #!/bin/bash
+
+set -eu
+
 # http://code.stapelberg.de/git/i3status/tree/contrib/measure-net-speed.bash
 
 # path to store the old results in
 path="/dev/shm/measure-net-speed"
 
-# grabbing data for each adapter.
-eth0=/sys/class/net/enxc8d719627aa9/statistics
-wlan0=/sys/class/net/wlan0/statistics
+# adapters:
+ETH="enxc8d719627aa9"
+WLAN="wlp2s0"
 
-read eth0_rx < "${eth0}/rx_bytes"
-read eth0_tx < "${eth0}/tx_bytes"
-read wlan0_rx < "${wlan0}/rx_bytes"
-read wlan0_tx < "${wlan0}/tx_bytes"
+# grabbing data for each adapter.
+eth_stat=/sys/class/net/$ETH/statistics
+wlan_stat=/sys/class/net/$WLAN/statistics
+
+eth0_rx=0
+eth0_tx=0
+wlan0_rx=0
+wlan0_tx=0
+
+if [ -r $eth_stat ]; then
+    read eth0_rx < "$eth_stat/rx_bytes"
+    read eth0_tx < "$eth_stat/tx_bytes"
+fi
+if [ -r $wlan_stat ]; then
+    read wlan0_rx < "$wlan_stat/rx_bytes"
+    read wlan0_tx < "$wlan_stat/tx_bytes"
+fi
 
 # get time and sum of rx/tx for combined display
 time=$(date +%s)
