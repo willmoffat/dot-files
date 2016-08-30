@@ -70,7 +70,11 @@
 (use-package tramp
   :ensure t
   :defer t
-  :init (setq tramp-default-method "ssh"))
+  :config
+  ;; (setq tramp-verbose 6) ;; Debugging for Muusedong.
+  ;; (add-to-list 'tramp-remote-path "/mnt/usb/usr/bin")
+  ;; (add-to-list 'tramp-remote-path "/mnt/usb/bin")
+  (setq tramp-default-method "ssh"))
 
 ;; Auto-complete
 (use-package ido
