@@ -18,7 +18,7 @@ DUMP_DIR="/var/log/webmonitor"
 function email_log {
   LABEL=$1
   LOG=$2
-  mail -s "[webmonitor] $LABEL" "$EMAIL" < "$LOG"
+  mail -aFrom:will@example.com -s "[webmonitor] $LABEL" "$EMAIL" < "$LOG"
 }
 
 function check {
