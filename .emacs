@@ -146,8 +146,14 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-;; HTML/XML/JavaScript
+;; Lua
+;; sudo luarocks install luacheck # For flycheck.
+(use-package lua-mode
+  :ensure t
+  :defer t
+  :mode "\\.lua")
 
+;; HTML/XML/JavaScript
 (use-package js2-mode
   :ensure t
   :mode ("\\.js" "\\.gs")
