@@ -196,6 +196,15 @@
   (add-hook 'after-init-hook 'server-start t)
   (add-hook 'after-init-hook 'edit-server-start t))
 
+;; Support programs generating color output in compile buffer.
+;; Based on http://stackoverflow.com/questions/3072648/
+(use-package ansi-color
+  :ensure t
+  :init
+  (defun my-colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; General setup ;;
