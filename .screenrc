@@ -1,0 +1,12 @@
+startup_message off
+
+# Change screen escape sequence from Ctrl-a to Ctrl-Shift-6
+escape ^^^
+
+# Scrolling
+# Ctrl-Shift-6 Esc then PgUp, PgDn
+defscrollback 20000 
+
+# Open Serial port
+screen /dev/ttyUSB0 115200
+
