@@ -127,9 +127,20 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# bindsym $mod+$alt+8 exec i3-msg workspace 8;  exec google-chrome --profile-directory="Profile 0"
-# bindsym $mod+$alt+9 exec i3-msg workspace 9;  exec google-chrome --profile-directory="Profile 1"
-# bindsym $mod+$alt+0 exec i3-msg workspace 10; exec google-chrome --profile-directory="Profile 2"
+# Important apps have fixed workspaces.
+
+bindsym $mod+$alt+1 exec i3-msg workspace 1; exec emacs
+# ls .config/google-chrome
+bindsym $mod+$alt+2 exec i3-msg workspace 2; \
+        exec google-chrome --profile-directory="Default" # Personal
+bindsym $mod+$alt+3 exec i3-msg workspace 3; \
+        exec google-chrome --profile-directory="Profile 2" # Muuselabs
+bindsym $mod+$alt+4 exec i3-msg workspace 4; \
+        exec google-chrome --profile-directory="Profile 3" # Ouderraad
+# Not used: Profile 4 = hamstersoup   Profile 5 = theo
+bindsym $mod+$alt+5 exec i3-msg workspace 5; \
+        exec --no-startup-id "google-chrome --incognito"
+
 
 # Top status bar showing network throughput, load, date etc.
 bar {
@@ -162,7 +173,3 @@ bindsym $mod+Control+l exec "systemctl suspend && i3lock"
 
 # PreScr - Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id  ~/.dotfiles/bin/screenshot.sh
-
-bindsym $mod+n \
-        fullscreen disable \
-        exec --no-startup-id "google-chrome --incognito"
