@@ -130,7 +130,8 @@ bindsym $mod+r mode "resize"
 
 # Important apps have fixed workspaces.
 
-bindsym $mod+$alt+1 exec i3-msg workspace 1; exec emacs
+bindsym $mod+$alt+1 exec i3-msg workspace 1; \
+        exec --no-startup-id emacs
 # ls .config/google-chrome
 bindsym $mod+$alt+2 exec i3-msg workspace 2; \
         exec google-chrome --profile-directory="Default" # Personal
