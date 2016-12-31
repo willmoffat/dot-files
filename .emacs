@@ -294,6 +294,10 @@
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-x f") 'clang-format-buffer)
 
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-0") 'text-scale-set)
+
 ;; Default keys to remember:
 ;;
 ;; C-c left/right = navigate HTML tags.
