@@ -160,8 +160,8 @@ bar {
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys/
 
 # Sreen brightness controls.
-bindsym XF86MonBrightnessUp   exec xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 # Pulse Audio controls.
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
@@ -171,6 +171,9 @@ bindsym XF86AudioMute        exec pactl set-sink-mute 1 toggle
 # Prevent screen-tearing in Chrome
 # sudo apt-get install compton
 exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+
+# Network Manager GUI.
+exec --no-startup-id nm-applet
 
 # Lock screen and suspend
 bindsym $mod+$alt+l exec --no-startup-id \
