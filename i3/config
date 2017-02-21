@@ -177,7 +177,7 @@ exec --no-startup-id nm-applet
 
 # Lock screen and suspend
 bindsym $mod+$alt+l exec --no-startup-id \
-        "i3lock -c 990000 ; systemctl suspend"
+        "sync ; i3lock -c 990000 ; systemctl suspend"
 
 # PreScr - Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id  ~/.dotfiles/bin/screenshot.sh
