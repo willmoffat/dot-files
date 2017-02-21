@@ -3,3 +3,5 @@
 	name = Will Moffat
 [push]
 	default = simple
+[color]
+	ui = auto
