@@ -7,8 +7,7 @@
 (require 'package)
 (setq package-enable-at-startup nil)  ;; But don't load all the packages.
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-             '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Bootstrap 'use-package' https://github.com/jwiegley/use-package
@@ -31,16 +30,22 @@
   :ensure t
   :init (global-flycheck-mode))
 
+
+;; Manual magit install
+(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+(require 'magit)
+(bind-key "C-x g" 'magit-status)
+
 ;; Amazing git diff!
 ;; Show output from commit hook.
-(use-package magit
-  :ensure t
-  :defer t
-  :bind ("C-x g" . magit-status)
-  :init (setq magit-last-seen-setup-instructions "1.4.0")
-  :config
-  (add-hook 'git-commit-mode-hook
-            (lambda () (save-selected-window (magit-process)))))
+;; (use-package magit
+;;   :ensure t
+;;   :defer t
+;;   :bind ("C-x g" . magit-status)
+;;   :init (setq magit-last-seen-setup-instructions "1.4.0")
+;;   :config
+;;   (add-hook 'git-commit-mode-hook
+;;             (lambda () (save-selected-window (magit-process)))))
 
 ;; Dark color theme.
 (use-package zenburn-theme
@@ -67,14 +72,21 @@
 ;; if [ "$TERM" = "eterm-color" ]; then
 ;;   PROMPT_COMMAND=set-eterm-dir
 ;; fi
+
 (use-package tramp
-  :ensure t
-  :defer t
-  :config
-  ;; (setq tramp-verbose 6) ;; Debugging for Muusedong.
-  ;; (add-to-list 'tramp-remote-path "/mnt/usb/usr/bin")
-  ;; (add-to-list 'tramp-remote-path "/mnt/usb/bin")
-  (setq tramp-default-method "ssh"))
+   :ensure t
+   :defer t
+   :config
+   ;; http://emacs.stackexchange.com/questions/18438
+   ;; Emacs suspend at startup ssh connection issue
+   (setq tramp-ssh-controlmaster-options
+         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"
+         )
+   (setq tramp-default-method "ssh"))
+;;   ;; (setq tramp-verbose 6) ;; Debugging for Muusedong.
+;;   ;; (add-to-list 'tramp-remote-path "/mnt/usb/usr/bin")
+;;   ;; (add-to-list 'tramp-remote-path "/mnt/usb/bin")
+
 
 ;; Auto-complete
 (use-package ido
