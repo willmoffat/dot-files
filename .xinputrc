@@ -1,0 +1,4 @@
+run_im ibus
+
+# Note(wdm) Capslock as Control
+setxkbmap -option ctrl:nocaps

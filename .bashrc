@@ -134,3 +134,6 @@ if [ -x "$(command -v keychain)" ]; then
     # sudo apt-get install keychain # To install on laptop.
     eval $(keychain --eval id_rsa)
 fi
+
+# Dotfiles in Git.
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
