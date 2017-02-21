@@ -13,4 +13,5 @@ function config {
 }
 
 config diff
+config reset
 config checkout
