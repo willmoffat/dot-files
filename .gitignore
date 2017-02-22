@@ -11,6 +11,8 @@ go/
 projects/
 to_review/
 
+.xsession-errors
+
 # Review these:
 .AndroidStudio2.1/
 .AndroidStudio2.2/
