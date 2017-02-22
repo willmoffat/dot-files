@@ -12,6 +12,11 @@ function config {
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 
-config diff
-config reset
-config checkout
+printf "\nDiff:"
+config diff .
+
+printf "\nReset:"
+config reset .
+
+printf "\nCheckout:"
+config checkout .
