@@ -12,6 +12,9 @@ projects/
 to_review/
 
 .xsession-errors
+.xsession-errors.old
+.subversion/
+.wget-hsts
 
 # Review these:
 .AndroidStudio2.1/
