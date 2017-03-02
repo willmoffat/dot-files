@@ -176,8 +176,9 @@ exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 exec --no-startup-id nm-applet
 
 # Lock screen and suspend
-bindsym $mod+$alt+l exec --no-startup-id \
-        "sync ; i3lock -c 990000 ; systemctl suspend"
+bindsym $mod+$alt+l       exec --no-startup-id $dir/setpower.sh freeze
+bindsym $mod+$alt+shift+l exec --no-startup-id $dir/setpower.sh disk
+
 
 # PreScr - Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id  $dir/screenshot.sh
