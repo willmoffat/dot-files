@@ -127,6 +127,7 @@
   :ensure t
   :defer t
   :diminish whitespace-mode
+  :bind ("C-t" . whitespace-mode) ;; Toggle showing whitespace
   :init (add-hook 'prog-mode-hook 'whitespace-mode)
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
   :config (set-face-attribute 'whitespace-space nil :background "gray25"))
@@ -296,13 +297,13 @@
 ;; (global-set-key "\C-w" 'backward-kill-word) TODO: C-backspace?
 ;; TODO(wdm) Add kill-region
 (global-set-key (kbd "C-z") 'undo)
-(global-unset-key (kbd "C-t"))  ;; Disable transpose.
 (global-unset-key (kbd "C-x C-c"))  ;; Default exit is too easy to press.
 (global-set-key (kbd "C-x C-c C-v") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-x c") 'compile)
 (global-set-key (kbd "C-c C-k") 'kill-compilation)
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
 
+(global-set-key (kbd "C-c l") 'toggle-truncate-lines)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-x f") 'clang-format-buffer)
 
