@@ -2,8 +2,8 @@
 
 set -eu
 
-# sudo apt-get -y update
-# sudo apt-get -y install git-core
+sudo apt-get -y update
+sudo apt-get -y install git-core keychain
 
 cd $HOME
 git clone --bare https://github.com/willmoffat/dot-files.git .dotfiles
