@@ -20,5 +20,5 @@ eterm*)
     ;;
 esac
 
-
-
+# Serial port screen.
+alias ss='screen /dev/ttyUSB* 115200'

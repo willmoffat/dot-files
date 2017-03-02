@@ -3,10 +3,10 @@ startup_message off
 # Change screen escape sequence from Ctrl-a to Ctrl-Shift-6
 escape ^^^
 
-# Scrolling
-# Ctrl-Shift-6 Esc then PgUp, PgDn
+# Scrolling - http://stackoverflow.com/questions/359109
 defscrollback 20000 
+termcapinfo xterm* ti@:te@
 
-# Open Serial port
-screen /dev/ttyUSB0 115200
-
+# look and feel
+caption always "%{= bb}%{+b w}%n %h %=%t %c"
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
