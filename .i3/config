@@ -176,8 +176,8 @@ exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 exec --no-startup-id nm-applet
 
 # Lock screen and suspend
-bindsym $mod+$alt+l       exec --no-startup-id $dir/setpower.sh freeze
-bindsym $mod+$alt+shift+l exec --no-startup-id $dir/setpower.sh disk
+bindsym $mod+$alt+l       exec --no-startup-id $dir/setpower.sh suspend
+bindsym $mod+$alt+shift+l exec --no-startup-id $dir/setpower.sh hibernate
 
 
 # PreScr - Print Screen (user choses section)
