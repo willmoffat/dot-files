@@ -1,4 +1,4 @@
-function set-eterm-dir {
+function setEtermDir {
   echo -e "\033AnSiTu" "$LOGNAME"
   echo -e "\033AnSiTc" "$(pwd)"
   echo -e "\033AnSiTh" "$HOSTNAME"
@@ -6,7 +6,7 @@ function set-eterm-dir {
 }
 # Track directory, username, and cwd for remote logons.
 if [ "$TERM" = "eterm-color" ]; then
-  PROMPT_COMMAND=set-eterm-dir
+  PROMPT_COMMAND=setEtermDir
 fi
 
 if [ -f ~/.bashrc ]; then
