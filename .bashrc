@@ -130,9 +130,9 @@ export NVM_DIR="/home/wdm/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Setup SSH keys on my dev laptops.
-if [ -x "$(command -v keychain)" ]; then
+if [ -x "$(command -v keychain)" ] && [ -e .ssh/id_rsa ]; then
     # sudo apt-get install keychain # To install on laptop.
-    eval $(keychain --eval id_rsa)
+    eval "$(keychain --eval id_rsa)"
 fi
 
 # Dotfiles in Git.
