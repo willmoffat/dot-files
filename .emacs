@@ -60,33 +60,22 @@
   :defer t
   :config (setq clang-format-style "Chromium"))
 
-;; Remote editing
-;;  - Add this to .bash_profile on remote machines
-;; function set-eterm-dir {
-;;   echo -e "\033AnSiTu" "$LOGNAME"
-;;   echo -e "\033AnSiTc" "$(pwd)"
-;;   echo -e "\033AnSiTh" "SSH_PROFILE_NAME_OR_HOSTNAME"
-;;   history -a # Write history to disk.
-;; }
-;; # Track directory, username, and cwd for remote logons.
-;; if [ "$TERM" = "eterm-color" ]; then
-;;   PROMPT_COMMAND=set-eterm-dir
-;; fi
-
+;; Emacs remote shell editing.
+;; See .bash_profile for PROMPT_COMMAND requirements.
 (use-package tramp
    :ensure t
    :defer t
    :config
    ;; http://emacs.stackexchange.com/questions/18438
    ;; Emacs suspend at startup ssh connection issue
-   (setq tramp-ssh-controlmaster-options
-         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"
-         )
-   (setq tramp-default-method "ssh"))
-;;   ;; (setq tramp-verbose 6) ;; Debugging for Muusedong.
-;;   ;; (add-to-list 'tramp-remote-path "/mnt/usb/usr/bin")
-;;   ;; (add-to-list 'tramp-remote-path "/mnt/usb/bin")
-
+   ;; (setq tramp-ssh-controlmaster-options
+   ;;      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"
+   ;;      )
+   ;; (setq tramp-default-method "ssh"))
+   ;; (setq tramp-verbose 6) ;; Debugging.
+   ;; (add-to-list 'tramp-remote-path "/mnt/usb/usr/bin")
+   ;; (add-to-list 'tramp-remote-path "/mnt/usb/bin")
+)
 
 ;; Auto-complete
 (use-package ido
@@ -158,6 +147,13 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
+
+;; Yocto Bitbake
+(use-package bitbake
+  :ensure t
+  :defer t
+  :mode (("\\.bb" . bitbake-mode)
+         ("\\.bbappend" . bitbake-mode)))
 
 ;; Lua
 ;; sudo luarocks install luacheck # For flycheck.
