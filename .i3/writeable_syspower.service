@@ -1,0 +1,9 @@
+[Unit]
+Description=Setup Will's hacks on this machine
+
+[Service]
+ExecStart=/home/wdm/.i3/writeable_syspower.sh
+User=root
+
+[Install]
+WantedBy=multi-user.target 
