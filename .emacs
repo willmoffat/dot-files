@@ -25,11 +25,21 @@
 (use-package bind-key
   :ensure t)
 
+;; sudo yarn global add eslint babel-eslint eslint-plugin-react
+
 ;; In-place error highlighting.
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
-
+  :config
+  (global-flycheck-mode)
+   ;; disable jshint since we prefer eslint checking. What is jsonlist ??
+   (setq flycheck-disabled-checkers
+         (append flycheck-disabled-checkers
+                 '(javascript-jshint json-jsonlist)))
+   ;; use eslint with web-mode for jsx files
+   (flycheck-add-mode 'javascript-eslint 'web-mode)
+   ;; customize flycheck temp file prefix
+   (setq flycheck-temp-prefix ".flycheck"))
 
 ;; Manual magit install
 (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
