@@ -42,20 +42,19 @@
    (setq flycheck-temp-prefix ".flycheck"))
 
 ;; Manual magit install
-(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
-(require 'magit)
-(bind-key "C-x g" 'magit-status)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+;; (require 'magit)
+;; (bind-key "C-x g" 'magit-status)
 
 ;; Amazing git diff!
 ;; Show output from commit hook.
-;; (use-package magit
-;;   :ensure t
-;;   :defer t
-;;   :bind ("C-x g" . magit-status)
-;;   :init (setq magit-last-seen-setup-instructions "1.4.0")
-;;   :config
-;;   (add-hook 'git-commit-mode-hook
-;;             (lambda () (save-selected-window (magit-process)))))
+ (use-package magit
+   :ensure t
+   :defer t
+   :bind ("C-x g" . magit-status)
+   :config
+   (add-hook 'git-commit-mode-hook
+             (lambda () (save-selected-window (magit-process)))))
 
 ;; Dark color theme.
 (use-package zenburn-theme
