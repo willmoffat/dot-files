@@ -1,4 +1,13 @@
+.audacity-data/
+.babel.json
 .dotfiles/
+.eslintrc
+.subversion/
+.vim/
+.wget-hsts
+.xsession-errors
+.xsession-errors.old
+.yarnrc
 Android/
 Desktop/
 Documents/
@@ -10,15 +19,11 @@ bin/
 go/
 projects/
 to_review/
-
-.xsession-errors
-.xsession-errors.old
-.subversion/
-.wget-hsts
-
+        
 # Review these:
 .AndroidStudio2.1/
 .AndroidStudio2.2/
+.AndroidStudio2.3/
 .ICEauthority
 .Skype/
 .Xauthority
