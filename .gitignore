@@ -1,7 +1,6 @@
 .audacity-data/
 .babel.json
 .dotfiles/
-.eslintrc
 .subversion/
 .vim/
 .wget-hsts

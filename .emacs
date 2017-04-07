@@ -32,14 +32,23 @@
   :ensure t
   :config
   (global-flycheck-mode)
-   ;; disable jshint since we prefer eslint checking. What is jsonlist ??
-   (setq flycheck-disabled-checkers
-         (append flycheck-disabled-checkers
-                 '(javascript-jshint json-jsonlist)))
-   ;; use eslint with web-mode for jsx files
-   (flycheck-add-mode 'javascript-eslint 'web-mode)
-   ;; customize flycheck temp file prefix
-   (setq flycheck-temp-prefix ".flycheck"))
+  ;; disable jshint since we prefer eslint checking.
+  ;; What is TODO(wdm) jsonlist ??
+  (setq-default flycheck-disabled-checkers '(javascript-jshint))
+  ;; use eslint with web-mode for jsx files
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  ;; customize flycheck temp file prefix
+  (setq flycheck-temp-prefix ".flycheck"))
+
+
+;; For React JSX is .js files.
+(use-package rjsx-mode
+  :ensure t
+  :defer t
+  :mode ("\\.js" "\\.jsx")
+  :config
+  (define-key rjsx-mode-map "<" nil))
+
 
 ;; Manual magit install
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
@@ -174,9 +183,12 @@
 ;; HTML/XML/JavaScript
 (use-package js2-mode
   :ensure t
-  :mode ("\\.js" "\\.gs")
- ;; :config (setq js-indent-level 2)  ;; Google style.
-  )
+  ;;  :mode ("\\.js" "\\.gs") ;; Use rjsx-mode for now.
+  :config
+  (setq js2-mode-show-parse-errors nil)    ;; Use eslint & flycheck.
+  (setq js2-mode-show-strict-warnings nil) ;; Use eslint & flycheck.
+  (setq js2-basic-offset 2))  ;; Google style.
+
 
 ;; Download latest var.jar from http://validator.github.io/validator/
 ;; Unfortunately the gnu output isn't fully compile buffer comptabile, It
