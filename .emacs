@@ -25,6 +25,12 @@
 (use-package bind-key
   :ensure t)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;; sudo yarn global add eslint babel-eslint eslint-plugin-react
 
 ;; In-place error highlighting.
@@ -163,6 +169,12 @@
   :defer t
   :mode (("\\.bb" . bitbake-mode)
          ("\\.bbappend" . bitbake-mode)))
+
+;; CMake
+(use-package cmake-mode
+  :ensure t
+  :defer t
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
 ;; Lua
 ;; sudo luarocks install luacheck # For flycheck.
