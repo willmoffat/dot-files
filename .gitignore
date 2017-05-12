@@ -19,7 +19,16 @@ bin/
 go/
 projects/
 to_review/
-        
+
+# Mac junk
+.CFUserTextEncoding
+.DS_Store
+.Trash/
+.bash_sessions/
+Applications/
+Library/
+Movies/
+
 # Review these:
 .AndroidStudio2.1/
 .AndroidStudio2.2/
