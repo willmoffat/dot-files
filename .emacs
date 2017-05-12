@@ -207,6 +207,7 @@
 
 ;; gofmt for JavaScript
 ;; No package available yet, manual install:
+;; sudo yarn global add prettier
 ;; cd ~/bin; curl -O https://raw.githubusercontent.com/prettier/prettier/master/editors/emacs/prettier-js.el
 (use-package prettier-js
   :load-path "~/tools/emacs"   ;; :ensure t
