@@ -1,3 +1,4 @@
+[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot bash RC"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -7,6 +8,8 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+
+[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "interactive"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

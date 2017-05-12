@@ -1,3 +1,5 @@
+[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot bash profile"
+
 export GOPATH=$HOME/go
 export PATH=$HOME/bin:$GOPATH/bin:$PATH
 

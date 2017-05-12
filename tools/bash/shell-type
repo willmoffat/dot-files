@@ -1,0 +1,53 @@
+# ;; -*- mode: shell-script; -*-
+
+function interactive {
+    echo 'Interactive:
+commands are run with user-interaction from keyboard.
+E.g. the shell can prompt the user to enter input.
+'
+}
+
+function nonInteractive {
+    echo 'Non-Interactive:
+shell is probably(?) run from an automated process so it cannot
+assume if it can request input or that someone will see the output.
+E.g Maybe it is best to write output to a log-file.
+'
+}
+
+function login {
+    echo 'Login:
+Means that the shell is run as part of the login of the user to the
+system. One-time configuration to establish work-environment.
+'
+}
+
+function nonLogin {
+    echo 'Non-login:
+Any other shell run by the user after logging on, or which is run by
+any automated process which is not coupled to a logged in user.
+'
+}
+
+# From https://unix.stackexchange.com/questions/26676
+
+[[ $- == *i* ]] && interactive || nonInteractive
+
+shopt -q login_shell && login || nonLogin
+
+echo '
+See flow chart:
+http://www.solipsys.co.uk/new/BashInitialisationFiles.html
+
+My tests:
+
+X login:   .profile
+XTerm:     .bash_rc
+ansi-term: .bash_rc
+bash:      .bash_rc
+ssh:       .bash_profile -> .bashrc
+
+And .bashrc ->
+  .bash_aliases
+  .bash_local (My custom stuff)
+'
