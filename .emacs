@@ -58,9 +58,7 @@
    :ensure t
    :defer t
    :bind ("C-x g" . magit-status)
-   :config
-   (add-hook 'git-commit-mode-hook
-             (lambda () (save-selected-window (magit-process)))))
+)
 
 ;; Dark color theme.
 (use-package zenburn-theme
