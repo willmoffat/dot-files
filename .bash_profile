@@ -1,7 +1,6 @@
 [ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot bash profile"
 
-export GOPATH=$HOME/go
-export PATH=$HOME/bin:$GOPATH/bin:$PATH
+# This file is only used when you SSH into this account.
 
 function setEtermDir {
   echo -e "\033AnSiTu" "$LOGNAME"
@@ -14,11 +13,10 @@ if [ "$TERM" = "eterm-color" ]; then
   PROMPT_COMMAND=setEtermDir
 fi
 
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+if [ -f ~/.will_env ]; then
+    . ~/.will_env
 fi
 
-# Note(wdm): Local env not stored in git.
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
 fi

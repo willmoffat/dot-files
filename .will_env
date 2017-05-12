@@ -1,0 +1,11 @@
+[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot will env"
+
+# Setup environment variables here.
+
+export GOPATH=$HOME/go
+export PATH=$HOME/bin:$GOPATH/bin:$PATH
+
+# Note(wdm): Local env not stored in git.
+if [ -f ~/.will_env_local ]; then
+    . ~/.will_env_local
+fi
