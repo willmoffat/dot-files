@@ -1,3 +1,10 @@
+# ;; -*- mode: shell-script; -*-
+
+# Config Dotfiles in Git.
+alias cf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias cfs='cf status'
+alias cfd='cf diff'
+
 alias gs='git status'
 alias gd='git diff'
 alias gb='git branch'

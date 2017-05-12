@@ -1,3 +1,6 @@
+export GOPATH=$HOME/go
+export PATH=$HOME/bin:$GOPATH/bin:$PATH
+
 function setEtermDir {
   echo -e "\033AnSiTu" "$LOGNAME"
   echo -e "\033AnSiTc" "$(pwd)"
@@ -11,4 +14,9 @@ fi
 
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
+fi
+
+# Note(wdm): Local env not stored in git.
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
 fi

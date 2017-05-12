@@ -106,11 +106,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Note(wdm): Local env not stored in git.
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -122,18 +117,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GOPATH=$HOME/go
-export PATH=$HOME/bin:$GOPATH/bin:$PATH
-
-# Node/IoJs version manager.
-export NVM_DIR="/home/wdm/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # Setup SSH keys on my dev laptops.
 if [ -x "$(command -v keychain)" ] && [ -e .ssh/id_rsa ]; then
     # sudo apt-get install keychain # To install on laptop.
     eval "$(keychain --eval id_rsa)"
 fi
-
-# Dotfiles in Git.
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
