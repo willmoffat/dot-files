@@ -1,0 +1,11 @@
+#! /bin/sh
+# ;; -*- mode: shell-script; -*-
+if [ -f /var/say ]; then
+    if [ -x /usr/bin/spd-say ]; then
+        LC_ALL=en_US.UTF-8  /usr/bin/spd-say -w "$1"
+    elif [ -x /usr/bin/say ]; then
+        /usr/bin/say "$1"
+    else
+        echo "Say: $1"
+    fi
+fi

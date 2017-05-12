@@ -1,4 +1,4 @@
-[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot profile"
+$HOME/tools/bin/say "dot profile"
 
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
@@ -18,6 +18,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-if [ -f ~/.will_env ]; then
-    . ~/.will_env
+if [ -f $HOME/.will_env ]; then
+    . $HOME/.will_env
 fi

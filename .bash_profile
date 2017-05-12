@@ -1,4 +1,4 @@
-[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot bash profile"
+$HOME/tools/bin/say "dot bash profile"
 
 # This file is only used when you SSH into this account.
 

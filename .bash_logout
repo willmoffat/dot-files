@@ -1,4 +1,4 @@
-[ -f /var/say ] && LC_ALL=en_US.UTF-8 /usr/bin/say "dot bash logout"
+$HOME/tools/bin/say "dot bash logout"
 
 # when leaving the console clear the screen to increase privacy
 
