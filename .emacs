@@ -17,6 +17,9 @@
 (eval-when-compile
   (require 'use-package))
 
+;; TODO(wdm) Clean up use of :defer t - implied if :bind or :map used.
+;; TODO(wdm) Clean up :ensure t - (setq use-package-always-ensure t)
+
 ;;;;;;;;;;;;;;
 ;; Packages ;;
 ;;;;;;;;;;;;;;
@@ -185,8 +188,28 @@
 (use-package js2-mode
   :ensure t
   :mode ("\\.js" "\\.gs")
- ;; :config (setq js-indent-level 2)  ;; Google style.
+  :config
+  ;; Use flycheck and eslint for warnings.
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
+  ;; (setq js-indent-level 2)  ;; Google style.
   )
+
+;; gofmt for JavaScript
+;; No package available yet, manual install:
+;; cd ~/bin; curl -O https://raw.githubusercontent.com/prettier/prettier/master/editors/emacs/prettier-js.el
+(use-package prettier-js
+  :load-path "~/tools/emacs"   ;; :ensure t
+  :defer t
+  :commands (prettier-mode prettier)             ;; Auto-load TODO(wdm) Inv.
+  :bind (:map js2-mode-map ("C-x f" . prettier)) ;; Override clang-format
+  :init (add-hook 'js2-mode-hook 'prettier-mode)
+  :config
+  (setq prettier-args '(
+                        "--no-semi"
+                        "--single-quote"
+                        "--trailing-comma" "all"
+                        )))
 
 ;; Download latest var.jar from http://validator.github.io/validator/
 ;; Unfortunately the gnu output isn't fully compile buffer comptabile, It
