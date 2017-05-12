@@ -29,10 +29,11 @@
   :ensure t)
 
 (use-package exec-path-from-shell
+  :disabled ;; HACK
+  :if (memq window-system '(mac ns))
   :ensure t
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 ;; sudo yarn global add eslint babel-eslint eslint-plugin-react
 
