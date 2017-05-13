@@ -1,4 +1,5 @@
 # ;; -*- mode: shell-script; -*-
+$HOME/tools/bin/say "dot bash aliases"
 
 # Config Dotfiles in Git.
 alias cf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -29,3 +30,8 @@ esac
 
 # Serial port screen.
 alias ss='screen /dev/ttyUSB* 115200'
+
+# Note(wdm): Local aliases not stored in git.
+if [ -f $HOME/.bash_aliases_local ]; then
+    . $HOME/.bash_aliases_local
+fi

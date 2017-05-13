@@ -1,7 +1,7 @@
 # ;; -*- mode: shell-script; -*-
 $HOME/tools/bin/say "dot will env"
 
-# Setup environment variables here.
+# Setup environment variables here. Not aliases!
 
 export GOPATH=$HOME/go
 export PATH=$HOME/bin:$GOPATH/bin:$PATH

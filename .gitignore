@@ -19,6 +19,7 @@
 /projects
 /to_review
 /.will_env_local
+/.bash_aliases_local
 
 # Mac junk
 /.CFUserTextEncoding

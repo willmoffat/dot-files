@@ -125,3 +125,5 @@ if [ -x "$(command -v keychain)" ] && [ -e .ssh/id_rsa ]; then
     # sudo apt-get install keychain # To install on laptop.
     eval "$(keychain --eval id_rsa)"
 fi
+
+$HOME/tools/bash/check_dirs.sh 'PATH' "$PATH"
