@@ -108,6 +108,8 @@
   :ensure t
   :config
   (ido-mode 1)
+  (setq ido-max-work-file-list 100  ;; Remember lots of visited files.
+        confirm-nonexistent-file-or-buffer nil) ;; Don't prompt again.
   (ido-everywhere 1))
 
 ;; camelCase Navigation
@@ -179,6 +181,7 @@
   :ensure t
   :defer t
   :mode (("\\.bb" . bitbake-mode)
+         ("\\.inc" . bitbake-mode)
          ("\\.bbappend" . bitbake-mode)))
 
 ;; CMake
@@ -202,7 +205,7 @@
   ;; Use flycheck and eslint for warnings.
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
-  ;; (setq js-indent-level 2)  ;; Google style.
+  (setq js-indent-level 2)  ;; Google style. HACK not working?
   )
 
 ;; gofmt for JavaScript
@@ -351,6 +354,8 @@
 (global-set-key (kbd "C-x c") 'compile)
 (global-set-key (kbd "C-c C-k") 'kill-compilation)
 (global-set-key (kbd "C-x t") 'visit-ansi-term)
+(global-set-key (kbd "C-x y") (lambda () (interactive) (ansi-term "/bin/bash")))
+
 
 (global-set-key (kbd "C-c l") 'toggle-truncate-lines)
 (global-set-key (kbd "M-g") 'goto-line)
