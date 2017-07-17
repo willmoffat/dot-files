@@ -182,3 +182,10 @@ bindsym $mod+$alt+shift+l exec --no-startup-id $dir/suspend.sh hibernate
 
 # PreScr - Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id  $dir/screenshot.sh
+
+# App-specific customizations:
+for_window [title="^led_ctrl$"] \
+           floating enable \
+           move absolute position 1500 px 20 px
+# TODO(wdm) Why doesn't this work?
+no_focus [title="^led_ctrl$"]
