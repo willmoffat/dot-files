@@ -209,11 +209,22 @@ Recognized extensions: .h, .hh or .hxx"
     (message "Invalid C/C++ header file.")))
 
 ;; Lua
+
+(defun luafmt ()
+  "Run luafmt current file and revert the buffer."
+  (interactive)
+  (shell-command
+   (format "luafmt %s"
+       (shell-quote-argument (buffer-file-name))))
+  (revert-buffer t t t))
+
 ;; sudo luarocks install luacheck # For flycheck.
 (use-package lua-mode
   :ensure t
   :defer t
+  :bind ("C-x f" . luafmt)
   :mode "\\.lua")
+
 
 ;; HTML/XML/JavaScript
 (use-package js2-mode
@@ -242,6 +253,10 @@ Recognized extensions: .h, .hh or .hxx"
                         "--single-quote"
                         "--trailing-comma" "all"
                         )))
+
+(use-package tide
+  :ensure t
+  :mode ("\\.ts\\'" . typescript-mode))
 
 ;; Download latest var.jar from http://validator.github.io/validator/
 ;; Unfortunately the gnu output isn't fully compile buffer comptabile, It
@@ -289,6 +304,10 @@ Recognized extensions: .h, .hh or .hxx"
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 
+(use-package go-mode
+  :ensure t
+  :mode "\\.go\\'"
+)
 ;;;;;;;;;;;;;;;;;;;
 ;; General setup ;;
 ;;;;;;;;;;;;;;;;;;;
