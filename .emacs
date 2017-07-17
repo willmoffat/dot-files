@@ -190,6 +190,24 @@
   :defer t
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
+
+(defun insert-header-guard ()
+  "Insert header guard in C/C++ header file.
+Recognized extensions: .h, .hh or .hxx"
+  (interactive)
+  (if (string-match "\\.h\\(h\\|xx\\)?\\'" (file-name-nondirectory buffer-file-name))
+      (let ((header-guard
+             (concat
+              (upcase (replace-regexp-in-string "[-.]" "_" (file-name-nondirectory buffer-file-name)))
+              "_")))
+        (save-excursion
+          (goto-char (point-min))
+          (insert "#ifndef " header-guard "\n")
+          (insert "#define " header-guard "\n\n")
+          (goto-char (point-max))
+          (insert "\n#endif /* !" header-guard " */\n")))
+    (message "Invalid C/C++ header file.")))
+
 ;; Lua
 ;; sudo luarocks install luacheck # For flycheck.
 (use-package lua-mode
