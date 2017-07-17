@@ -4,7 +4,7 @@ $HOME/tools/bin/say "dot will env"
 # Setup environment variables here. Not aliases!
 
 export GOPATH=$HOME/go
-export PATH=$HOME/bin:$GOPATH/bin:$PATH
+export PATH=$HOME/bin:$HOME/tools/bin:$GOPATH/bin:$PATH
 
 # Note(wdm): Local env not stored in git.
 if [ -f $HOME/.will_env_local ]; then
