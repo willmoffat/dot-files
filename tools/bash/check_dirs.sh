@@ -9,8 +9,8 @@ echo "Checking:  $1"
 IFS=':'
 for p in $2; do
     if [[ -d "$p" ]]; then
-        echo "OK: $p"
+        echo "  $p"
     else
-        echo "Fail: $p"
+        echo "? $p"
     fi
 done
