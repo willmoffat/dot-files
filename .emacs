@@ -249,6 +249,7 @@ Recognized extensions: .h, .hh or .hxx"
   :init (add-hook 'js2-mode-hook 'prettier-mode)
   :config
   (setq prettier-args '(
+                        "--print-width" "100"
                         "--no-semi"
                         "--single-quote"
                         "--trailing-comma" "all"

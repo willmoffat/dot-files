@@ -31,6 +31,9 @@ esac
 # Serial port screen.
 alias ss='screen /dev/ttyUSB* 115200'
 
+# systemd
+alias c='sudo systemctl'
+
 # Note(wdm): Local aliases not stored in git.
 if [ -f $HOME/.bash_aliases_local ]; then
     . $HOME/.bash_aliases_local

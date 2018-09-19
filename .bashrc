@@ -126,4 +126,6 @@ if [ -x "$(command -v keychain)" ] && [ -e .ssh/id_rsa ]; then
     eval "$(keychain --eval id_rsa)"
 fi
 
+export PATH="$HOME/.yarn/bin:$PATH"
+
 $HOME/tools/bash/check_dirs.sh 'PATH' "$PATH"
