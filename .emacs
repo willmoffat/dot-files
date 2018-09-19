@@ -145,9 +145,16 @@
   :defer t
   :diminish whitespace-mode
   :bind ("C-t" . whitespace-mode) ;; Toggle showing whitespace
-  :init (add-hook 'prog-mode-hook 'whitespace-mode)
+  :init (add-hook 'prog-mode-hook (lambda ()
+                              (when (eq major-mode 'js2-mode)
+                                (setq whitespace-line-column 120))
+                              (whitespace-mode)
+                              ))
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
-  :config (set-face-attribute 'whitespace-space nil :background "gray25"))
+  :config
+  (set-face-attribute 'whitespace-space nil :background "gray25")
+  ;; JS with JSX is really verbose. Allow wider lines.
+  )
 
 
 ;; Trim extra white-space in lines edited.
@@ -249,7 +256,7 @@ Recognized extensions: .h, .hh or .hxx"
   :init (add-hook 'js2-mode-hook 'prettier-mode)
   :config
   (setq prettier-args '(
-                        "--print-width" "100"
+                        "--print-width" "120"
                         "--no-semi"
                         "--single-quote"
                         "--trailing-comma" "all"

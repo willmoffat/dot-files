@@ -129,3 +129,5 @@ fi
 export PATH="$HOME/.yarn/bin:$PATH"
 
 $HOME/tools/bash/check_dirs.sh 'PATH' "$PATH"
+
+export PATH="$HOME/.yarn/bin:$PATH"
