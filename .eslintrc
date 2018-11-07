@@ -21,15 +21,15 @@
       "jsx": true
     }
   },
+  "extends": "eslint:recommended",
   "rules": {
     "comma-dangle": ["error", "always-multiline"],
     "consistent-return": [0],
     "key-spacing": [0],
     "quotes": [0],
     "new-cap": [0],
-    "no-multi-spaces": [0],
+    "no-console": ["error", { allow: ["log", "warn", "error"] }],
     "no-shadow": [0],
-    "no-unused-vars": [1],
     "no-use-before-define": [2, "nofunc"],
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
