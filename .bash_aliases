@@ -2,7 +2,7 @@
 $HOME/tools/bin/say "dot bash aliases"
 
 # Config Dotfiles in Git.
-alias cf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias cf='/usr/bin/git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 alias cfs='cf status'
 alias cfd='cf diff'
 
