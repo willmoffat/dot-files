@@ -6,6 +6,6 @@ users:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
 package_upgrade: true
 runcmd:
-  - curl -sSL https://agent.digitalocean.com/install.sh | sh
+  - curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash
   - sudo -u wdm -- sh -c "curl 'https://raw.githubusercontent.com/willmoffat/dot-files/master/.dotfiles-other/bootstrap.sh' | bash"
   - shutdown -r now
