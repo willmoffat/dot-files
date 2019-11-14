@@ -8,7 +8,7 @@ set -eu
 path="/dev/shm/measure-net-speed"
 
 # adapters:
-ETH="enxc8d719627aa9"
+ETH="enp2s0" # HACK "enxc8d719627aa9"
 WLAN="wlp2s0"
 
 # grabbing data for each adapter.
@@ -84,7 +84,7 @@ if [[ "${time_diff}" -gt 0 ]]; then
   mem=$(awk '/MemTotal/ {memtotal=$2}; /MemAvailable/ {memavail=$2}; END { \
           printf("%.0f", (100- (memavail / memtotal * 100))) }' \
           /proc/meminfo)
-  echo -n " 🐏$mem% "
+  echo -n " $mem% "
 else
   echo -n " ? "
 fi

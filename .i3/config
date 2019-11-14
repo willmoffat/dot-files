@@ -103,6 +103,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec \
   "i3-nagbar -t warning -m 'Exit' -b 'Yes' 'i3-msg exit'"
 
+# Make the nagbar dismisable.
+bindsym $mod+Shift+k exec \
+  "killall i3-nagbar"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -149,6 +153,7 @@ bindsym $mod+$alt+5 exec i3-msg workspace 5; \
 # Top status bar showing network throughput, load, date etc.
 bar {
     status_command $dir/i3status-with-network.bash
+#    status_command i3status -c $dir/i3status.conf
     position top
     font pango:12
     colors {
@@ -175,6 +180,9 @@ exec --no-startup-id compton -cCGb --backend glx --vsync opengl
 # Network Manager GUI.
 exec --no-startup-id nm-applet
 
+# Clear login background.
+exec --no-startup-id xsetroot -solid "#333333"
+
 # Lock screen and suspend
 bindsym $mod+$alt+l       exec --no-startup-id $dir/suspend.sh suspend
 bindsym $mod+$alt+shift+l exec --no-startup-id $dir/suspend.sh hibernate
@@ -189,3 +197,7 @@ for_window [title="^led_ctrl$"] \
            move absolute position 1500 px 20 px
 # TODO(wdm) Why doesn't this work?
 no_focus [title="^led_ctrl$"]
+
+# RSI timer. Dismss with $mod+Shift+k (kill nagbar)
+# First kill any other instances of this timer running.
+exec --no-startup-id $dir/rsi-timer.sh
