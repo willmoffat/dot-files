@@ -72,6 +72,8 @@
    :defer t
    :bind ("C-x g" . magit-status)
 )
+;; Exclude Expo crap by default.
+(setq-default vc-git-grep-template "git --no-pager grep -n <C> -e <R> -- <F> ':(exclude)android/**' ':(exclude)ios/**' ':(exclude)*.lock'")
 
 ;; Dark color theme.
 (use-package zenburn-theme
@@ -236,7 +238,7 @@ Recognized extensions: .h, .hh or .hxx"
 ;; HTML/XML/JavaScript
 (use-package js2-mode
   :ensure t
-  :mode ("\\.js" "\\.gs")
+  :mode ("\\.js" "\\.mjs")
   :config
   ;; Use flycheck and eslint for warnings.
   (setq js2-mode-show-parse-errors nil)
