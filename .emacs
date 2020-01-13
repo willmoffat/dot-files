@@ -73,7 +73,7 @@
    :bind ("C-x g" . magit-status)
 )
 ;; Exclude Expo crap by default.
-(setq-default vc-git-grep-template "git --no-pager grep -n <C> -e <R> -- <F> ':(exclude)android/**' ':(exclude)ios/**' ':(exclude)*.lock'")
+(setq-default vc-git-grep-template "git --no-pager grep -n <C> -e <R> -- <F> ':(exclude)**android/**' ':(exclude)**ios/**' ':(exclude)*.lock'")
 
 ;; Dark color theme.
 (use-package zenburn-theme
