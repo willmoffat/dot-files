@@ -20,6 +20,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# Trigger Expo Debug menu on Android
+bindsym $mod+Escape exec $dir/expoDevMenu.sh
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -172,6 +175,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
 bindsym XF86AudioMute        exec pactl set-sink-mute 1 toggle
+
+# Desktop
+bindsym KP_Add exec pactl set-sink-volume 0 +5%
+bindsym KP_Subtract exec pactl set-sink-volume 0 -5%
 
 # Prevent screen-tearing in Chrome
 # sudo apt-get install compton
