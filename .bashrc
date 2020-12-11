@@ -121,9 +121,16 @@ if ! shopt -oq posix; then
 fi
 
 # Setup SSH keys on my dev laptops.
+# sudo apt-get install keychain
 if [ -x "$(command -v keychain)" ] && [ -e .ssh/id_rsa ]; then
-    # sudo apt-get install keychain # To install on laptop.
-    eval "$(keychain --eval id_rsa)"
+    eval "$(keychain --eval id_rsa jooki-key1)"
 fi
 
 $HOME/tools/bash/check_dirs.sh 'PATH' "$PATH"
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
