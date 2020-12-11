@@ -81,8 +81,7 @@
   :config (load-theme 'zenburn t))
 
 ;; go-fmt for other languages.
-;; sudo apt-get install clang-format-3.6
-;; cd /usr/bin; sudo ln -s clang-format-3.6 clang-format
+;; clang-format -style=Chromium -dump-config > ~/.clang-format
 (use-package clang-format
   :ensure t
   :defer t
@@ -106,13 +105,28 @@
 )
 
 ;; Auto-complete
-(use-package ido
+;; https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
+(use-package ivy
+  :demand
   :ensure t
   :config
-  (ido-mode 1)
-  (setq ido-max-work-file-list 100  ;; Remember lots of visited files.
-        confirm-nonexistent-file-or-buffer nil) ;; Don't prompt again.
-  (ido-everywhere 1))
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "%d/%d "))
+(use-package counsel
+  :ensure t)
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+;; (use-package ido
+;;   :ensure t
+;;   :config
+;;   (ido-mode 1)
+;;   (setq ido-max-work-file-list 100  ;; Remember lots of visited files.
+;;         confirm-nonexistent-file-or-buffer nil) ;; Don't prompt again.
+;;   (ido-everywhere 1))
 
 ;; camelCase Navigation
 ;; We want to navigate camelCase words as separate words.
@@ -243,26 +257,16 @@ Recognized extensions: .h, .hh or .hxx"
   ;; Use flycheck and eslint for warnings.
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
-  (setq js-indent-level 2)  ;; Google style. HACK not working?
-  )
+)
 
 ;; gofmt for JavaScript
-;; No package available yet, manual install:
-;; sudo yarn global add prettier
-;; cd ~/bin; curl -O https://raw.githubusercontent.com/prettier/prettier/master/editors/emacs/prettier-js.el
-(use-package prettier-js
-  :load-path "~/tools/emacs"   ;; :ensure t
+;; https://github.com/jscheid/prettier.el - Unofficial but more active than prettier-js
+(use-package prettier
+  :ensure t
   :defer t
-  :commands (prettier-mode prettier)             ;; Auto-load TODO(wdm) Inv.
-  :bind (:map js2-mode-map ("C-x f" . prettier)) ;; Override clang-format
-  :init (add-hook 'js2-mode-hook 'prettier-mode)
-  :config
-  (setq prettier-args '(
-                        "--print-width" "120"
-                        "--no-semi"
-                        "--single-quote"
-                        "--trailing-comma" "all"
-                        )))
+  :bind (:map js-mode-map ("C-x f" . prettier-prettify)) ;; Override clang-format
+  :init (global-prettier-mode)
+)
 
 (use-package tide
   :ensure t
@@ -273,6 +277,7 @@ Recognized extensions: .h, .hh or .hxx"
 ;; outputs local URLs like "file:/foo/bar.html" rather than filenames. This
 ;; breaks error navigation.
 (defun html5-validate()
+  "Validate current file as valid HTML5."
   (interactive)
   (save-buffer)
   (compile (concat "java -jar ~/bin/vnu.jar "
@@ -366,7 +371,7 @@ Recognized extensions: .h, .hh or .hxx"
   (font-lock-add-keywords
    nil '(
          ("\\<\\(TODO\\|Note\\)" 1 font-lock-warning-face t)
-         ("\\<\\(HACK\\)" 1 '(:foreground "red") t)
+         ("\\<\\(HACK\\|FIXME\\)" 1 '(:foreground "red") t)
          )
    ))
 (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
@@ -381,12 +386,13 @@ Recognized extensions: .h, .hh or .hxx"
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 (defun visit-ansi-term()
-  "Switch to *ansi-term* buffer, creating it if necessary"
+  "Switch to *ansi-term* buffer, creating it if necessary."
   (interactive)
   (if (get-buffer "*ansi-term*")
       (switch-to-buffer "*ansi-term*")
     (ansi-term "/bin/bash")))
 
+(add-to-list 'auto-mode-alist '("\\.rc$" . sh-mode))
 ;;;;;;;;;;
 ;; Keys ;;
 ;;;;;;;;;;
