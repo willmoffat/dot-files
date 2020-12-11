@@ -10,24 +10,17 @@ alias gs='git status'
 alias gd='git diff'
 alias gdm='git diff --stat master'
 alias gb='git branch'
+alias gr='cd "$(git rev-parse --show-toplevel)"'
 
-if command -v nautilus >/dev/null 2>&1; then
-   alias o='nautilus 2>/dev/null'
-else
-   alias o='gnome-open'
+alias www='busybox httpd -p 8000 -f -vv'
+
+if   command -v nautilus   &> /dev/null; then alias o='nautilus 2>/dev/null'
+elif command -v thunar     &> /dev/null; then alias o='thunar 2>/dev/null'
+elif command -v gnome-open &> /dev/null; then alias o='gnome-open 2>/dev/null'
 fi
 
-# Send file to emacs, starting in daemon mode if necessary.
-alias e='TERM=xterm-256color emacsclient -nw --alternate-editor=""'
-
-# If this is an emacs terminal then don't start emacs in emacs frame.
-case "$TERM" in
-eterm*)
-    alias e='emacsclient'
-    ;;
-*)
-    ;;
-esac
+# Open specified file in exisiting emacs.
+alias e='emacsclient'
 
 # Serial port screen.
 alias ss='screen /dev/ttyUSB* 115200'
@@ -35,6 +28,7 @@ alias ss='screen /dev/ttyUSB* 115200'
 # systemd
 alias c='sudo systemctl'
 
+# Android
 alias expo-dev-menu='adb shell input keyevent 82'
 
 # Note(wdm): Local aliases not stored in git.
