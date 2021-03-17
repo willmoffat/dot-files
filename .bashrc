@@ -63,10 +63,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Note(wdm) Bash Prompt. Show current path on it's own line since it can be long.
+#           Show timestamps. Use # to reduce damage of accidental copy/paste.
+# # wdm@hostname:/tmp
+# # 16:30:01 >
 if [ "$color_prompt" = yes ]; then
-    PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\t > '
+    PS1='\n# ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n# \t # '
 else
-    PS1='\n${debian_chroot:+($debian_chroot)}\u@\h:\w\n\t > '
+    PS1='\n# ${debian_chroot:+($debian_chroot)}\u@\h:\w\n# \t # '
 fi
 unset color_prompt force_color_prompt
 
@@ -131,6 +135,3 @@ $HOME/tools/bash/check_dirs.sh 'PATH' "$PATH"
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
