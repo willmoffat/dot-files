@@ -50,6 +50,13 @@
   ;; customize flycheck temp file prefix
   (setq flycheck-temp-prefix ".flycheck"))
 
+;; Shell lint
+;; apt-get install shellcheck
+(use-package flymake-shellcheck
+  :ensure t
+  :commands flymake-shellcheck-load
+  :init
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load))
 
 ;; For React JSX is .js files.
 (use-package rjsx-mode
@@ -111,6 +118,7 @@
   :ensure t
   :config
   (setq ivy-use-virtual-buffers t
+        ivy-mode 1
         ivy-count-format "%d/%d "))
 (use-package counsel
   :ensure t)
@@ -264,7 +272,7 @@ Recognized extensions: .h, .hh or .hxx"
 (use-package prettier
   :ensure t
   :defer t
-  :bind (:map js-mode-map ("C-x f" . prettier-prettify)) ;; Override clang-format
+;;  :bind (:map js-mode-map ("C-x f" . prettier-prettify)) ;; Override clang-format
   :init (global-prettier-mode)
 )
 
