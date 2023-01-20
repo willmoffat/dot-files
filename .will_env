@@ -1,5 +1,5 @@
 # ;; -*- mode: shell-script; -*-
-$HOME/tools/bin/say "dot will env"
+"$HOME"/tools/bin/say "dot will env"
 
 # Setup environment variables here. Not aliases!
 
@@ -7,6 +7,6 @@ export GOPATH=$HOME/go
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/tools/bin:$GOPATH/bin:$HOME/.yarn/bin:$PATH
 
 # Note(wdm): Local env not stored in git.
-if [ -f $HOME/.will_env_local ]; then
-    . $HOME/.will_env_local
+if [ -f "$HOME"/.will_env_local ]; then
+    . "$HOME"/.will_env_local
 fi
