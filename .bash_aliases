@@ -23,7 +23,9 @@ fi
 alias e='emacsclient'
 
 # Serial port screen.
-alias ss='screen /dev/ttyUSB* 115200'
+alias s0='screen /dev/ttyUSB0 115200'
+alias s1='screen /dev/ttyUSB1 115200'
+alias s2='screen /dev/ttyUSB2 115200'
 
 # systemd
 alias c='sudo systemctl'
