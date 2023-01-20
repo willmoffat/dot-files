@@ -1,5 +1,5 @@
 # ;; -*- mode: shell-script; -*-
-$HOME/tools/bin/say "dot bash aliases"
+"$HOME/tools/bin/say" "dot bash aliases"
 
 # Config Dotfiles in Git.
 alias cf='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -34,6 +34,9 @@ alias c='sudo systemctl'
 alias expo-dev-menu='adb shell input keyevent 82'
 
 # Note(wdm): Local aliases not stored in git.
-if [ -f $HOME/.bash_aliases_local ]; then
-    . $HOME/.bash_aliases_local
+if [ -f "$HOME/.bash_aliases_local" ]; then
+    . "$HOME/.bash_aliases_local"
 fi
+
+# Google workspace admin
+function gam() { "$HOME/bin/gam/gam" "$@" ; }
