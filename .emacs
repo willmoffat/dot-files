@@ -330,7 +330,14 @@ Recognized extensions: .h, .hh or .hxx"
 (use-package go-mode
   :ensure t
   :mode "\\.go\\'"
+  :init
+  (add-hook 'before-save-hook 'gofmt-before-save t)
 )
+
+(use-package json-mode
+  :ensure t
+)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; General setup ;;
 ;;;;;;;;;;;;;;;;;;;
