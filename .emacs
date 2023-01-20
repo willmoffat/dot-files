@@ -83,9 +83,9 @@
 (setq-default vc-git-grep-template "git --no-pager grep -n <C> -e <R> -- <F> ':(exclude)**android/**' ':(exclude)**ios/**' ':(exclude)*.lock'")
 
 ;; Dark color theme.
-(use-package zenburn-theme
+(use-package hc-zenburn-theme
   :ensure t
-  :config (load-theme 'zenburn t))
+  :config (load-theme 'hc-zenburn t))
 
 ;; go-fmt for other languages.
 ;; clang-format -style=Chromium -dump-config > ~/.clang-format
@@ -176,7 +176,7 @@
                               ))
   ;; TODO(wdm) Cleaner fix to whitespace UI problems.
   :config
-  (set-face-attribute 'whitespace-space nil :background "gray25")
+  (set-face-attribute 'whitespace-space nil :background "gray21")
   ;; JS with JSX is really verbose. Allow wider lines.
   )
 

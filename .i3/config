@@ -3,10 +3,14 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Note(wdm) If run with debug logs then use i3-dump-log to view.
+#           Installed from https://i3wm.org/docs/repositories.html
 
 set $mod Mod4
 set $alt Mod1
 set $dir ~/.i3
+
+# Note(wdm) Stuff not shared on GitHub ;-)
+include $dir/i3.secrets.config
 
 # Use Win-Shift-r to reload this file. ($mod+shift+r = restart i3 in place)
 
@@ -143,16 +147,15 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+$alt+1 exec i3-msg workspace 1; \
         exec --no-startup-id emacs
-# ls .config/google-chrome
-bindsym $mod+$alt+2 exec i3-msg workspace 2; \
-        exec google-chrome --profile-directory="Default" # Personal
-bindsym $mod+$alt+3 exec i3-msg workspace 3; \
-        exec google-chrome --profile-directory="Profile 2" # Muuselabs
-bindsym $mod+$alt+4 exec i3-msg workspace 4; \
-        exec google-chrome --profile-directory="Profile 3" # Ouderraad
-# Not used: Profile 4 = hamstersoup   Profile 5 = theo
-bindsym $mod+$alt+5 exec i3-msg workspace 5; \
-        exec --no-startup-id "google-chrome --incognito"
+
+# List profile directories and associated Google accounts:
+# for dir in ~/.config/google-chrome/*; do [ -r "$dir/Preferences" ] ||
+#   continue ; echo; basename "$dir" ;
+#   jq '.account_info[].email' "$dir/Preferences"; done
+
+# See secret file for actual bindings
+# bindsym $mod+$alt+2 exec i3-msg workspace 2; \
+#        exec google-chrome --profile-directory="Default" # Personal
 
 
 # Top status bar showing network throughput, load, date etc.
@@ -179,12 +182,17 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
 bindsym XF86AudioMute        exec pactl set-sink-mute 1 toggle
 
 # Desktop
-bindsym KP_Add exec pactl set-sink-volume 0 +5%
-bindsym KP_Subtract exec pactl set-sink-volume 0 -5%
+bindsym KP_Add      exec pactl set-sink-volume 1 +5%
+bindsym KP_Subtract exec pactl set-sink-volume 1 -5%
 
 # Prevent screen-tearing in Chrome
 # sudo apt-get install compton
-exec --no-startup-id compton -cCGb --backend glx --vsync opengl
+# Note(wdm) Not using: -c Enabled client-side shadows on windows.
+# -C Avoid drawing shadows on dock/panel windows.
+# -G Don't draw shadows on DND windows
+# -b Daemonize process.
+exec --no-startup-id compton -CGb --backend glx --vsync opengl
+
 
 # Network Manager GUI.
 exec --no-startup-id nm-applet
@@ -194,18 +202,16 @@ exec --no-startup-id xsetroot -solid "#333333"
 
 # Lock screen and suspend
 bindsym $mod+$alt+l       exec --no-startup-id $dir/suspend.sh suspend
-bindsym $mod+$alt+shift+l exec --no-startup-id $dir/suspend.sh hibernate
+# bindsym $mod+$alt+shift+l exec --no-startup-id $dir/suspend.sh hibernate
 
 
-# PreScr - Print Screen (user choses section)
+# Android Print Screen
+bindsym $mod+Print exec $dir/androidPrintScreen.sh
+
+# Print Screen (user choses section)
 bindsym --release Print exec --no-startup-id ~/bin/ksnip --rectarea
 
-# App-specific customizations:
-for_window [title="^led_ctrl$"] \
-           floating enable \
-           move absolute position 1500 px 20 px
-# TODO(wdm) Why doesn't this work?
-no_focus [title="^led_ctrl$"]
+
 
 # RSI timer. Dismss with $mod+Shift+k (kill nagbar)
 # First kill any other instances of this timer running.
